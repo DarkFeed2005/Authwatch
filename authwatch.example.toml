@@ -1,0 +1,34 @@
+# Copy to authwatch.toml and run:  authwatch --config authwatch.toml
+# Secrets are better supplied via environment variables:
+#   DISCORD_WEBHOOK_URL, ABUSEIPDB_API_KEY
+
+log_path = "/var/log/auth.log"   # any file works for testing, e.g. "./test-auth.log"
+start_at_end = true              # false = replay the whole file first
+poll_interval_ms = 250
+
+[detection]
+brute_force_threshold = 5        # failures from one IP ...
+brute_force_window_secs = 60     # ... within this many seconds
+spray_distinct_users = 4         # distinct usernames from one IP ...
+spray_window_secs = 300          # ... within this many seconds
+compromise_prior_failures = 3    # success after >= N failures ...
+compromise_window_secs = 600     # ... within this many seconds
+max_tracked_ips = 10000
+ignore_ips = ["127.0.0.1", "::1"]   # add your bastion / monitoring IPs
+
+# Replaces the built-in sudo rule list when present. Each rule is a regex over the COMMAND= part.
+# [[detection.sudo_rules]]
+# name = "package install"
+# pattern = '\b(apt|apt-get|dnf|yum)\s+install\b'
+
+[discord]
+# webhook_url = "https://discord.com/api/webhooks/<id>/<token>"   # prefer the env var
+bot_name = "AuthWatch"
+cooldown_secs = 900              # same alert key at most once per 15 min
+max_per_minute = 10              # global cap across all alerts
+
+[abuseipdb]
+enabled = false
+# api_key = "..."                # prefer ABUSEIPDB_API_KEY
+max_age_days = 90
+cache_ttl_secs = 21600
