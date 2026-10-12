@@ -1,0 +1,19 @@
+[package]
+name = "authwatch-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "authwatch"
+path = "src/main.rs"
+
+[dependencies]
+authwatch-core = { path = "../authwatch-core" }
+anyhow.workspace = true
+chrono.workspace = true
+clap.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
