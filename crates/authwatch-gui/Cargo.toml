@@ -1,0 +1,20 @@
+[package]
+name = "authwatch-gui"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "authwatch-gui"
+path = "src/main.rs"
+
+[dependencies]
+authwatch-core = { path = "../authwatch-core" }
+anyhow.workspace = true
+chrono.workspace = true
+clap.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+eframe = "0.31"
